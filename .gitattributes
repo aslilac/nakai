@@ -1,2 +1,3 @@
+Makefile  -linguist-detectable
 src/nakai/html.gleam  linguist-generated
 src/nakai/attr.gleam  linguist-generated
