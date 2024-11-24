@@ -1,8 +1,8 @@
 name = "nakai"
-version = "1.0.0"
+version = "1.1.0"
 licences = ["MIT"]
 description = "HTML generation for Gleam, on the server or anywhere else"
-repository = { type = "github", user = "nakaixo", repo = "nakai" }
+repository = { type = "github", user = "aslilac", repo = "nakai" }
 links = [
   { title = "Website", href = "https://nakaixo.github.io" },
   { title = "Sponsor", href = "https://github.com/sponsors/aslilac" },
@@ -12,11 +12,11 @@ internal_modules = ["nakai/internal/*"]
 gleam = ">= 1.0.0"
 
 [dependencies]
-gleam_stdlib = ">= 0.36.0 and < 2.0.0"
+gleam_stdlib = ">= 0.43.0 and < 2.0.0"
 
 [dev-dependencies]
 envoy = "~> 1.0"
-gleam_json = "~> 0.7"
-gleeunit = "~> 1.0"
-glychee = "~> 0.3"
-simplifile = "~> 1.0"
+gleam_json = "~> 2.1"
+gleeunit = "~> 1.2"
+glychee = "~> 1.1"
+simplifile = "~> 2.2"

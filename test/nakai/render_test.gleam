@@ -6,33 +6,33 @@ import snapshot
 
 pub fn empty_test() {
   html.Nothing
-  |> nakai.to_string_builder()
+  |> nakai.to_string_tree()
   |> snapshot.match("./test/testdata/empty.html")
 }
 
 pub fn head_test() {
   html.Head([html.title("Hi!")])
-  |> nakai.to_string_builder()
+  |> nakai.to_string_tree()
   |> snapshot.match("./test/testdata/head_1.html")
 
   html.div([], [html.Head([html.title("Hi!")])])
-  |> nakai.to_string_builder()
+  |> nakai.to_string_tree()
   |> snapshot.match("./test/testdata/head_2.html")
 
   html.Head([html.Head([html.Head([html.title("Hi!")])])])
-  |> nakai.to_string_builder()
+  |> nakai.to_string_tree()
   |> snapshot.match("./test/testdata/head_3.html")
 }
 
 pub fn attrs_on_html_test() {
   html.Html([attr.lang("en-US")], [html.p_text([], "Hello!")])
-  |> nakai.to_string_builder()
+  |> nakai.to_string_tree()
   |> snapshot.match("./test/testdata/attrs_on_html.html")
 }
 
 pub fn attrs_on_body_test() {
   html.Body([attr.class("dark-mode")], [html.p_text([], "Hello!")])
-  |> nakai.to_string_builder()
+  |> nakai.to_string_tree()
   |> snapshot.match("./test/testdata/attrs_on_body.html")
 }
 
@@ -40,25 +40,25 @@ const xhtml11 = "html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/T
 
 pub fn doctype_test() {
   html.Fragment([html.Doctype(xhtml11), html.div_text([], "Hi friend!")])
-  |> nakai.to_string_builder()
+  |> nakai.to_string_tree()
   |> snapshot.match("./test/testdata/doctype.html")
 }
 
 pub fn text_sanitization_test() {
   html.div_text([], "<script>alert('pwned');</script>")
-  |> nakai.to_string_builder()
+  |> nakai.to_string_tree()
   |> snapshot.match("./test/testdata/text_sanitization.html")
 }
 
 pub fn attr_sanitization_test() {
   html.div([attr.id("\"><script>alert('pwned');</script>")], [])
-  |> nakai.to_string_builder()
+  |> nakai.to_string_tree()
   |> snapshot.match("./test/testdata/attr_sanitization_1.html")
 }
 
 pub fn attributes_that_are_gleam_keywords_test() {
   html.input([attr.type_("text")])
-  |> nakai.to_string_builder()
+  |> nakai.to_string_tree()
   |> snapshot.match("./test/testdata/attributes_that_are_gleam_keywords.html")
 }
 
@@ -69,13 +69,13 @@ pub fn attributes_with_hyphens_test() {
       attr.content("default-src 'self';"),
     ]),
   ])
-  |> nakai.to_string_builder()
+  |> nakai.to_string_tree()
   |> snapshot.match("./test/testdata/attributes_with_hyphens.html")
 }
 
 pub fn comment_sanitization_test() {
   html.Comment("--><script>alert('pwned');</script>")
-  |> nakai.to_string_builder()
+  |> nakai.to_string_tree()
   |> snapshot.match("./test/testdata/comment_sanitization.html")
 }
 

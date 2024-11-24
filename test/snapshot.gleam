@@ -1,10 +1,10 @@
 import envoy as env
-import gleam/string_builder.{type StringBuilder}
+import gleam/string_tree.{type StringTree}
 import gleeunit/should
 import simplifile as file
 
-pub fn match(result: StringBuilder, snapshot_file: String) {
-  string_builder.to_string(result)
+pub fn match(result: StringTree, snapshot_file: String) {
+  string_tree.to_string(result)
   |> match_string(snapshot_file)
 }
 

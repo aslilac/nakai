@@ -24,6 +24,6 @@ pub fn app() {
 
 pub fn app_test() {
   app()
-  |> nakai.to_string_builder()
+  |> nakai.to_string_tree()
   |> snapshot.match("./test/testdata/integration/info.html")
 }

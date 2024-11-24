@@ -1,7 +1,7 @@
 import gleam/list
 import gleam/option
 import gleam/string
-import gleam/string_builder.{type StringBuilder}
+import gleam/string_tree.{type StringTree}
 import nakai/attr.{type Attr, Attr}
 import nakai/html.{type Node}
 import nakai/internal/document.{type Document}
@@ -17,11 +17,11 @@ const document_builder = Builder(
 
 const inline_builder = Builder(
   map: render_inline_node,
-  fold: string_builder.concat,
+  fold: string_tree.concat,
 )
 
-fn render_doctype(doctype: String) -> StringBuilder {
-  string_builder.from_strings(["<!DOCTYPE ", doctype, ">\n"])
+fn render_doctype(doctype: String) -> StringTree {
+  string_tree.from_strings(["<!DOCTYPE ", doctype, ">\n"])
 }
 
 fn render_children(children: List(Node), builder: Builder(output)) -> output {
@@ -30,19 +30,19 @@ fn render_children(children: List(Node), builder: Builder(output)) -> output {
   |> builder.fold()
 }
 
-fn render_attrs(attrs: List(Attr)) -> StringBuilder {
+fn render_attrs(attrs: List(Attr)) -> StringTree {
   attrs
   |> list.map(render_attr)
-  |> list.fold(string_builder.new(), string_builder.append_builder)
+  |> list.fold(string_tree.new(), string_tree.append_tree)
 }
 
-fn render_attr(attr: Attr) -> StringBuilder {
+fn render_attr(attr: Attr) -> StringTree {
   let Attr(name, value) = attr
   let sanitized_value =
     value
     |> string.replace("\"", "&quot;")
     |> string.replace(">", "&gt;")
-  string_builder.from_strings([" ", name, "=\"", sanitized_value, "\""])
+  string_tree.from_strings([" ", name, "=\"", sanitized_value, "\""])
 }
 
 fn render_document_node(tree: Node) -> Document {
@@ -65,21 +65,21 @@ fn render_document_node(tree: Node) -> Document {
 
     html.Element(tag, attrs, children) -> {
       let child_document = render_children(children, document_builder)
-      string_builder.concat([
-        string_builder.from_strings(["<", tag]),
+      string_tree.concat([
+        string_tree.from_strings(["<", tag]),
         render_attrs(attrs),
-        string_builder.from_string(">"),
+        string_tree.from_string(">"),
         child_document.body,
-        string_builder.from_strings(["</", tag, ">"]),
+        string_tree.from_strings(["</", tag, ">"]),
       ])
       |> document.replace_body(child_document, _)
     }
 
     html.LeafElement(tag, attrs) ->
-      string_builder.concat([
-        string_builder.from_strings(["<", tag]),
+      string_tree.concat([
+        string_tree.from_strings(["<", tag]),
         render_attrs(attrs),
-        string_builder.from_string(" />"),
+        string_tree.from_string(" />"),
       ])
       |> document.from_body()
 
@@ -87,29 +87,29 @@ fn render_document_node(tree: Node) -> Document {
       let content =
         content
         |> string.replace("-->", "")
-      string_builder.from_strings(["<!-- ", content, " -->"])
+      string_tree.from_strings(["<!-- ", content, " -->"])
       |> document.from_body()
     }
 
     html.Text(content) ->
-      string_builder.from_string(content)
-      |> string_builder.replace("&", "&amp;")
-      |> string_builder.replace("<", "&lt;")
-      |> string_builder.replace(">", "&gt;")
+      string_tree.from_string(content)
+      |> string_tree.replace("&", "&amp;")
+      |> string_tree.replace("<", "&lt;")
+      |> string_tree.replace(">", "&gt;")
       |> document.from_body()
 
     html.UnsafeInlineHtml(content) ->
-      string_builder.from_string(content)
+      string_tree.from_string(content)
       |> document.from_body()
 
     html.Script(attrs, content) ->
       document.from_script(
-        string_builder.concat([
-          string_builder.from_string("\n<script"),
+        string_tree.concat([
+          string_tree.from_string("\n<script"),
           render_attrs(attrs),
-          string_builder.from_string(">"),
-          string_builder.from_string(content),
-          string_builder.from_string("</script>"),
+          string_tree.from_string(">"),
+          string_tree.from_string(content),
+          string_tree.from_string("</script>"),
         ]),
       )
 
@@ -117,7 +117,7 @@ fn render_document_node(tree: Node) -> Document {
   }
 }
 
-fn render_inline_node(tree: Node) -> StringBuilder {
+fn render_inline_node(tree: Node) -> StringTree {
   case tree {
     html.Doctype(doctype) -> render_doctype(doctype)
 
@@ -134,70 +134,70 @@ fn render_inline_node(tree: Node) -> StringBuilder {
 
     html.Element(tag, attrs, children) -> {
       let child_document = render_children(children, inline_builder)
-      string_builder.concat([
-        string_builder.from_strings(["<", tag]),
+      string_tree.concat([
+        string_tree.from_strings(["<", tag]),
         render_attrs(attrs),
-        string_builder.from_string(">"),
+        string_tree.from_string(">"),
         child_document,
-        string_builder.from_strings(["</", tag, ">"]),
+        string_tree.from_strings(["</", tag, ">"]),
       ])
     }
 
     html.LeafElement(tag, attrs) ->
-      string_builder.concat([
-        string_builder.from_strings(["<", tag]),
+      string_tree.concat([
+        string_tree.from_strings(["<", tag]),
         render_attrs(attrs),
-        string_builder.from_string(" />"),
+        string_tree.from_string(" />"),
       ])
 
     html.Comment(content) -> {
       let content =
         content
         |> string.replace("-->", "")
-      string_builder.from_strings(["<!-- ", content, " -->"])
+      string_tree.from_strings(["<!-- ", content, " -->"])
     }
 
     html.Text(content) ->
-      string_builder.from_string(content)
-      |> string_builder.replace("&", "&amp;")
-      |> string_builder.replace("<", "&lt;")
-      |> string_builder.replace(">", "&gt;")
+      string_tree.from_string(content)
+      |> string_tree.replace("&", "&amp;")
+      |> string_tree.replace("<", "&lt;")
+      |> string_tree.replace(">", "&gt;")
 
-    html.UnsafeInlineHtml(content) -> string_builder.from_string(content)
+    html.UnsafeInlineHtml(content) -> string_tree.from_string(content)
 
     html.Script(attrs, content) ->
-      string_builder.concat([
-        string_builder.from_string("<script"),
+      string_tree.concat([
+        string_tree.from_string("<script"),
         render_attrs(attrs),
-        string_builder.from_string(">"),
-        string_builder.from_string(content),
-        string_builder.from_string("</script>"),
+        string_tree.from_string(">"),
+        string_tree.from_string(content),
+        string_tree.from_string("</script>"),
       ])
 
-    html.Nothing -> string_builder.new()
+    html.Nothing -> string_tree.new()
   }
 }
 
-pub fn render_document(tree: Node) -> StringBuilder {
+pub fn render_document(tree: Node) -> StringTree {
   let result = render_document_node(tree)
-  string_builder.concat([
+  string_tree.concat([
     render_doctype(
       result.doctype
       |> option.unwrap("html"),
     ),
-    string_builder.from_string("<html"),
+    string_tree.from_string("<html"),
     result.html_attrs,
-    string_builder.from_string(">\n<head>" <> document.encoding),
+    string_tree.from_string(">\n<head>" <> document.encoding),
     result.head,
-    string_builder.from_string("</head>\n<body"),
+    string_tree.from_string("</head>\n<body"),
     result.body_attrs,
-    string_builder.from_string(">"),
+    string_tree.from_string(">"),
     result.body,
-    string_builder.concat(result.scripts),
-    string_builder.from_string("</body>\n</html>\n"),
+    string_tree.concat(result.scripts),
+    string_tree.from_string("</body>\n</html>\n"),
   ])
 }
 
-pub fn render_inline(tree: Node) -> StringBuilder {
+pub fn render_inline(tree: Node) -> StringTree {
   render_inline_node(tree)
 }

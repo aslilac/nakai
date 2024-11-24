@@ -52,7 +52,7 @@ pub fn " <> name <> "_text(attrs: List(Attr), text: String) -> Node {
 }
 "
     Element(name, leaf) if leaf == True -> "
-/// The [HTML `<" <> name <> " />` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/" <> name <> ")
+/// The [HTML `<" <> name <> " />` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/" <> name <> ").
 pub fn " <> name <> "(attrs: List(Attr)) -> Node {
   LeafElement(tag: \"" <> name <> "\", attrs: attrs)
 }
@@ -124,7 +124,7 @@ fn codegen_attr(attr: AttrDescription) -> String {
   }
 
   // TODO: Figure out a nice way to link to attribute docs. This doesn't quite work:
-  // /// The [HTML `" <> name <> "` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/" <> name <> ")
+  // /// The [HTML `" <> name <> "` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/" <> name <> ").
   case attr {
     Attr(_) -> "
 pub fn " <> func_name <> "(value: String) -> Attr {
