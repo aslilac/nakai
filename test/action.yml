@@ -4,10 +4,10 @@ runs:
   steps:
     - uses: erlef/setup-beam@v1
       with:
-        elixir-version: "1.15"
-        otp-version: "26.2"
-        gleam-version: "1.1"
-        rebar3-version: "3.23"
+        elixir-version: "1.17"
+        otp-version: "27.1"
+        gleam-version: "1.6"
+        rebar3-version: "3.24"
 
     - run: |
         gleam format

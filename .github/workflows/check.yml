@@ -1,8 +1,8 @@
-name: main
+name: check
 
 on:
   push:
-    branches: ["main"]
+    branches: ["trunk"]
   pull_request:
     branches: ["**"]
 
@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
 
     steps:
