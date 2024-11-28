@@ -117,10 +117,9 @@ fn attr_decoder(value: Dynamic) -> Result(AttrDescription, dynamic.DecodeErrors)
 fn codegen_attr(attr: AttrDescription) -> String {
   let name = attr.name
   let func_name = case name {
+    "as" -> "as_"
     "type" -> "type_"
-    name ->
-      name
-      |> string.replace("-", "_")
+    name -> string.replace(name, "-", "_")
   }
 
   // TODO: Figure out a nice way to link to attribute docs. This doesn't quite work:

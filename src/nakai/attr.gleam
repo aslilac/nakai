@@ -77,6 +77,10 @@ pub fn aria_required(value: String) -> Attr {
   Attr(name: "aria-required", value: value)
 }
 
+pub fn as_(value: String) -> Attr {
+  Attr(name: "as", value: value)
+}
+
 pub fn async() -> Attr {
   Attr(name: "async", value: "true")
 }

@@ -46,6 +46,9 @@
 		"name": "aria-required"
 	},
 	{
+		"name": "as"
+	},
+	{
 		"name": "async",
 		"value": "true"
 	},
