@@ -1,5 +1,5 @@
 name = "nakai"
-version = "1.1.0"
+version = "1.1.1"
 licences = ["MIT"]
 description = "HTML generation for Gleam, on the server or anywhere else"
 repository = { type = "github", user = "aslilac", repo = "nakai" }
