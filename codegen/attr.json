@@ -97,6 +97,9 @@
 		"value": "true"
 	},
 	{
+		"name": "dirname"
+	},
+	{
 		"name": "disabled",
 		"value": "true"
 	},
@@ -111,7 +114,22 @@
 		"name": "for"
 	},
 	{
+		"name": "form"
+	},
+	{
 		"name": "formaction"
+	},
+	{
+		"name": "formenctype"
+	},
+	{
+		"name": "formmethod"
+	},
+	{
+		"name": "formnovalidate"
+	},
+	{
+		"name": "formtarget"
 	},
 	{
 		"name": "height"
@@ -124,6 +142,9 @@
 	},
 	{
 		"name": "id"
+	},
+	{
+		"name": "inputmode"
 	},
 	{
 		"name": "integrity"
@@ -154,10 +175,23 @@
 		"name": "minlength"
 	},
 	{
+		"name": "multiple",
+		"value": "true"
+	},
+	{
 		"name": "name"
 	},
 	{
+		"name": "pattern"
+	},
+	{
 		"name": "placeholder"
+	},
+	{
+		"name": "popovertarget"
+	},
+	{
+		"name": "popovertargetaction"
 	},
 	{
 		"name": "preload",
@@ -182,6 +216,9 @@
 	{
 		"name": "selected",
 		"value": "true"
+	},
+	{
+		"name": "size"
 	},
 	{
 		"name": "src"
