@@ -132,14 +132,23 @@
 		"name": "lang"
 	},
 	{
+		"name": "list"
+	},
+	{
 		"name": "loop",
 		"value": "true"
+	},
+	{
+		"name": "max"
 	},
 	{
 		"name": "maxlength"
 	},
 	{
 		"name": "method"
+	},
+	{
+		"name": "min"
 	},
 	{
 		"name": "minlength"
@@ -176,6 +185,9 @@
 	},
 	{
 		"name": "src"
+	},
+	{
+		"name": "step"
 	},
 	{
 		"name": "style"

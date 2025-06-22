@@ -181,8 +181,16 @@ pub fn lang(value: String) -> Attr {
   Attr(name: "lang", value: value)
 }
 
+pub fn list(value: String) -> Attr {
+  Attr(name: "list", value: value)
+}
+
 pub fn loop() -> Attr {
   Attr(name: "loop", value: "true")
+}
+
+pub fn max(value: String) -> Attr {
+  Attr(name: "max", value: value)
 }
 
 pub fn maxlength(value: String) -> Attr {
@@ -191,6 +199,10 @@ pub fn maxlength(value: String) -> Attr {
 
 pub fn method(value: String) -> Attr {
   Attr(name: "method", value: value)
+}
+
+pub fn min(value: String) -> Attr {
+  Attr(name: "min", value: value)
 }
 
 pub fn minlength(value: String) -> Attr {
@@ -235,6 +247,10 @@ pub fn selected() -> Attr {
 
 pub fn src(value: String) -> Attr {
   Attr(name: "src", value: value)
+}
+
+pub fn step(value: String) -> Attr {
+  Attr(name: "step", value: value)
 }
 
 pub fn style(value: String) -> Attr {
