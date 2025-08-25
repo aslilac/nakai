@@ -137,6 +137,10 @@ pub fn defer() -> Attr {
   Attr(name: "defer", value: "true")
 }
 
+pub fn dirname(value: String) -> Attr {
+  Attr(name: "dirname", value: value)
+}
+
 pub fn disabled() -> Attr {
   Attr(name: "disabled", value: "true")
 }
@@ -153,8 +157,28 @@ pub fn for(value: String) -> Attr {
   Attr(name: "for", value: value)
 }
 
+pub fn form(value: String) -> Attr {
+  Attr(name: "form", value: value)
+}
+
 pub fn formaction(value: String) -> Attr {
   Attr(name: "formaction", value: value)
+}
+
+pub fn formenctype(value: String) -> Attr {
+  Attr(name: "formenctype", value: value)
+}
+
+pub fn formmethod(value: String) -> Attr {
+  Attr(name: "formmethod", value: value)
+}
+
+pub fn formnovalidate(value: String) -> Attr {
+  Attr(name: "formnovalidate", value: value)
+}
+
+pub fn formtarget(value: String) -> Attr {
+  Attr(name: "formtarget", value: value)
 }
 
 pub fn height(value: String) -> Attr {
@@ -171,6 +195,10 @@ pub fn http_equiv(value: String) -> Attr {
 
 pub fn id(value: String) -> Attr {
   Attr(name: "id", value: value)
+}
+
+pub fn inputmode(value: String) -> Attr {
+  Attr(name: "inputmode", value: value)
 }
 
 pub fn integrity(value: String) -> Attr {
@@ -209,12 +237,28 @@ pub fn minlength(value: String) -> Attr {
   Attr(name: "minlength", value: value)
 }
 
+pub fn multiple() -> Attr {
+  Attr(name: "multiple", value: "true")
+}
+
 pub fn name(value: String) -> Attr {
   Attr(name: "name", value: value)
 }
 
+pub fn pattern(value: String) -> Attr {
+  Attr(name: "pattern", value: value)
+}
+
 pub fn placeholder(value: String) -> Attr {
   Attr(name: "placeholder", value: value)
+}
+
+pub fn popovertarget(value: String) -> Attr {
+  Attr(name: "popovertarget", value: value)
+}
+
+pub fn popovertargetaction(value: String) -> Attr {
+  Attr(name: "popovertargetaction", value: value)
 }
 
 pub fn preload() -> Attr {
@@ -243,6 +287,10 @@ pub fn role(value: String) -> Attr {
 
 pub fn selected() -> Attr {
   Attr(name: "selected", value: "true")
+}
+
+pub fn size(value: String) -> Attr {
+  Attr(name: "size", value: value)
 }
 
 pub fn src(value: String) -> Attr {
